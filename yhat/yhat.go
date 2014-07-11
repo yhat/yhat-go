@@ -59,8 +59,8 @@ func New(username, apikey, env string) (*Yhat, error) {
 }
 
 // Make a prediction through the Yhat api
-func (yhat *Yhat) Predict(modelname string, data interface{}) (interface{},
-	error) {
+func (yhat *Yhat) Predict(modelname string, data interface{}) (
+	map[string]interface{}, error) {
 	// Construct url for prediction endpoint
 	url := fmt.Sprintf("http://%s/%s/models/%s/",
 		yhat.env, yhat.username, modelname)
@@ -89,7 +89,7 @@ func (yhat *Yhat) Predict(modelname string, data interface{}) (interface{},
 
 	// Decode response from server
 	decoder := json.NewDecoder(res.Body)
-	var resInterface interface{}
+	var resInterface map[string]interface{}
 	err = decoder.Decode(&resInterface)
 	if err != nil {
 		return nil, errors.New("Invalid response from server")

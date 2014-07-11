@@ -51,7 +51,9 @@ func main() {
 		data := map[string]string{"name": "Hank"}
 		res, err := yh.Predict("HelloWorld", data)
 		if err == nil {
-			fmt.Printf("%s\n", res)
+			for k := range res {
+				fmt.Printf("%s: %s\n", k, res[k])
+			}
 		}
 	}
 }
@@ -60,5 +62,7 @@ func main() {
 Running this module will produce the following output:
 
 ```bash
-map[yhat_id:eafe5e3e-c0a5-4aae-bcf2-4879c47e0558 result:map[greeting:Hello Hank!] yhat_model:HelloWorld]
+yhat_id: f933c05c-71b2-424d-b9d0-c85b36b7039f
+result: map[greeting:[Hello Hank!]]
+yhat_model: HelloWorld
 ```
